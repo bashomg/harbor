@@ -85,22 +85,22 @@ function source(){
 async function release(){
   const r=source()
   if(!r)return
-  const page=`https://github.com/${r}/releases/latest`
+  const page=`https://github.com/${r}/releases`
+  dl.href=page
+  pt.href=page
   try{
-    const res=await fetch(`https://api.github.com/repos/${r}/releases/latest`,{headers:{Accept:'application/vnd.github+json'}})
-    if(res.status===404)return
+    const res=await fetch(`https://api.github.com/repos/${r}/releases?per_page=20`,{headers:{Accept:'application/vnd.github+json'}})
     if(!res.ok)throw new Error(res.status)
-    const j=await res.json()
-    const pick=re=>(j.assets||[]).find(a=>re.test(a.name))
+    const list=await res.json()
+    const rel=(Array.isArray(list)?list:[]).find(x=>!x.draft&&(x.assets||[]).some(a=>/\.exe$/i.test(a.name)))
+    if(!rel)return
+    const pick=re=>rel.assets.find(a=>re.test(a.name))
     const s=pick(/setup.*\.exe$/i)||pick(/\.exe$/i),p=pick(/portable.*\.exe$/i)
-    dl.href=s?s.browser_download_url:page
-    pt.href=p?p.browser_download_url:page
-    if(j.tag_name)ver=j.tag_name.replace(/^v/i,'')
+    if(s)dl.href=s.browser_download_url
+    if(p)pt.href=p.browser_download_url
+    if(rel.tag_name)ver=rel.tag_name.replace(/^v/i,'')
     meta()
-  }catch(e){
-    dl.href=page
-    pt.href=page
-  }
+  }catch(e){}
 }
 meta()
 release()
