@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Download Harbor</title>
+<meta name="description" content="Harbor is a controller-first launcher that makes your Windows PC feel like a console.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23000'/%3E%3Cg transform='translate(15 15) scale(.7)'%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M12 50a38 38 0 0 0 76 0z' fill='%23fff'/%3E%3Ccircle cx='50' cy='33' r='6' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+@property --spin{syntax:'<angle>';inherits:false;initial-value:0deg}
+:root{--black:#000;--ink:#050506;--text:#f4f4f5;--dim:#9a9ca3;--faint:#5c5e66;--steel:#4a4c55;--hl:linear-gradient(100deg,#fff,color-mix(in srgb,#fff 56%,var(--steel)));--font:"Segoe UI Variable Display","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;--ease:cubic-bezier(.2,.8,.2,1);color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{display:grid;grid-template-rows:1fr auto;min-height:100%;overflow-x:hidden;background:var(--black);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased}
+main{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1.25rem 2rem;text-align:center}
+.mark{position:relative;display:grid;place-items:center;width:7rem;height:7rem;margin-bottom:2.25rem}
+.mark svg{position:relative;width:100%;height:100%;overflow:visible}
+.glow{position:absolute;left:50%;top:50%;width:28rem;height:28rem;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.12),transparent);pointer-events:none;animation:glow 1.6s .9s ease-out both}
+.ring{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-dasharray:239;stroke-dashoffset:239;transform:rotate(-90deg);transform-origin:50px 50px;animation:draw 1s .15s cubic-bezier(.6,0,.2,1) forwards}
+.sea{fill:#fff;animation:sea .6s .75s ease-out both}
+.lamp{fill:#fff;transform-origin:50px 33px;animation:lamp .45s 1.05s cubic-bezier(.2,1.6,.4,1) both}
+h1{font-size:clamp(2.75rem,7vw,4rem);font-weight:600;letter-spacing:-.035em;line-height:1}
+.tag{max-width:30ch;margin-top:.9rem;color:var(--dim);font-size:clamp(1rem,2.2vw,1.125rem);line-height:1.45;text-wrap:balance}
+.dl{position:relative;display:inline-flex;align-items:center;gap:.75rem;margin-top:2.75rem;padding:1.05rem 1.9rem 1.05rem 1.6rem;border-radius:1rem;background:var(--hl);color:var(--ink);font:600 1.05rem/1 var(--font);letter-spacing:-.005em;text-decoration:none;outline:none;transition:scale .35s var(--ease)}
+.dl::before{content:"";position:absolute;inset:-.45rem;padding:2px;border-radius:1.4rem;background:conic-gradient(from var(--spin),#fff,rgba(255,255,255,.07) 22%,rgba(255,255,255,.07) 50%,#fff 72%,rgba(255,255,255,.07) 94%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 3.6s linear infinite}
+.dl:hover{scale:1.03}
+.dl:active{scale:.98}
+.dl:focus-visible::before{padding:3px;background:#fff}
+.dl svg{width:1.2rem;height:1.2rem;flex:none}
+.meta{margin-top:1.5rem;color:var(--faint);font-size:.875rem;line-height:1.75}
+.meta a{color:var(--dim);text-decoration:underline;text-decoration-color:var(--steel);text-underline-offset:3px;border-radius:.25rem;outline-offset:3px}
+.meta a:hover{color:var(--text)}
+.meta a:focus-visible{outline:2px solid var(--text)}
+.rise{animation:rise .7s var(--ease) both}
+.d1{animation-delay:1s}
+.d2{animation-delay:1.08s}
+.d3{animation-delay:1.16s}
+.d4{animation-delay:1.24s}
+footer{max-width:46ch;margin:0 auto;padding:1.5rem 1.25rem 1.75rem;color:var(--faint);font-size:.8rem;line-height:1.6;text-align:center;text-wrap:balance}
+.hints{position:fixed;right:1.75rem;bottom:1.5rem;display:flex;align-items:center;gap:.55rem;color:var(--dim);font-size:.85rem;opacity:0;transition:opacity .4s}
+.hints.on{opacity:1}
+.hints b{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--text);color:var(--ink);font-size:.72rem;font-weight:700}
+@keyframes spin{to{--spin:360deg}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes sea{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
+@keyframes lamp{from{scale:0}to{scale:1}}
+@keyframes glow{from{opacity:0;scale:.85}to{opacity:1;scale:1}}
+@keyframes rise{from{opacity:0;translate:0 .6rem}to{opacity:1;translate:0 0}}
+@media (max-width:640px){.hints{display:none}main{padding-top:3rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ring{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<main>
+<div class="mark" aria-hidden="true">
+<i class="glow"></i>
+<svg viewBox="0 0 100 100"><circle class="ring" cx="50" cy="50" r="38"/><path class="sea" d="M12 50a38 38 0 0 0 76 0z"/><circle class="lamp" cx="50" cy="33" r="6"/></svg>
+</div>
+<h1 class="rise d1">Harbor</h1>
+<p class="tag rise d2">A controller-first launcher that makes your PC feel like a console.</p>
+<a class="dl rise d3" id="dl" href="Harbor-Setup-0.7.0.exe" download>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg>
+Download for Windows
+</a>
+<p class="meta rise d4"><span id="os">Version 0.7.0 for Windows 10 and 11, 64-bit.</span><br>Prefer no install? Get the <a id="pt" href="Harbor-Portable-0.7.0.exe" download>portable version</a>.</p>
+</main>
+<footer>Harbor isn't code-signed yet, so Windows may stop the installer. Select More info, then Run anyway.</footer>
+<div class="hints" id="hints" aria-hidden="true"><b>A</b>Download</div>
+<script>
+const REPO=''
+const dl=document.getElementById('dl'),pt=document.getElementById('pt'),os=document.getElementById('os'),hints=document.getElementById('hints')
+const isWin=/Windows/i.test(navigator.userAgent)
+let ver='0.7.0'
+function meta(){
+  os.textContent=isWin?`Version ${ver} for Windows 10 and 11, 64-bit.`:`Version ${ver} for Windows 10 and 11. Open this page on your PC to install it.`
+}
+function source(){
+  if(REPO)return REPO
+  const m=location.hostname.match(/^([\w-]+)\.github\.io$/i)
+  if(!m)return ''
+  const seg=location.pathname.split('/').filter(Boolean)[0]
+  return m[1]+'/'+(seg&&!/\.\w+$/.test(seg)?seg:m[1]+'.github.io')
+}
+async function release(){
+  const r=source()
+  if(!r)return
+  const page=`https://github.com/${r}/releases/latest`
+  try{
+    const res=await fetch(`https://api.github.com/repos/${r}/releases/latest`,{headers:{Accept:'application/vnd.github+json'}})
+    if(res.status===404)return
+    if(!res.ok)throw new Error(res.status)
+    const j=await res.json()
+    const pick=re=>(j.assets||[]).find(a=>re.test(a.name))
+    const s=pick(/setup.*\.exe$/i)||pick(/\.exe$/i),p=pick(/portable.*\.exe$/i)
+    dl.href=s?s.browser_download_url:page
+    pt.href=p?p.browser_download_url:page
+    if(j.tag_name)ver=j.tag_name.replace(/^v/i,'')
+    meta()
+  }catch(e){
+    dl.href=page
+    pt.href=page
+  }
+}
+meta()
+release()
+let held=false,raf=0
+function poll(){
+  const pad=[...(navigator.getGamepads?navigator.getGamepads():[])].find(Boolean)
+  if(!pad){hints.classList.remove('on');raf=0;return}
+  const a=!!(pad.buttons[0]&&pad.buttons[0].pressed)
+  if(a&&!held)dl.click()
+  held=a
+  raf=requestAnimationFrame(poll)
+}
+addEventListener('gamepadconnected',()=>{hints.classList.add('on');if(!raf)raf=requestAnimationFrame(poll)})
+</script>
+</body>
+</html>
